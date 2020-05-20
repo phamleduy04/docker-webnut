@@ -13,11 +13,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - id: ghactions
-        uses: actions/checkout@v2
-        name: gh tests
+      - uses: actions/checkout@v2
+      - name: gh tests
         continue-on-error: true
-      - run: ls -alR
+        run: ls -alR
           
       - id: buildpush 
       - uses: docker/build-push-action@v1
