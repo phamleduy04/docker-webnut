@@ -1,0 +1,12 @@
+version: "3.5"
+services:
+  webnut:
+    image: edgd1er/webnut:latest
+    restart: always
+    environment:
+      UPS_HOST: "10.11.12.13"
+      UPS_PORT: "3493"
+      UPS_USER: "monuser"
+      UPS_PASSWORD: "secret"
+    ports:
+      - "6543:6543"
