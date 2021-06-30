@@ -20,7 +20,7 @@ jobs:
         run: ls -alR
           
       - id: buildpush  
-        uses: docker/build-push-action@v1
+        uses: docker/build-push-action@v2.5.0
         name: Build and push image
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
