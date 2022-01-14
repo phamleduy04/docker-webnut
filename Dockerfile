@@ -1,17 +1,14 @@
-FROM python:3.7-alpine3.14
+# syntax=docker/dockerfile:1
+FROM python:3-alpine3.15
 
 LABEL maintainer=edgd1er@hotmail.com
 EXPOSE 6543
 
-WORKDIR /app/webNUT
-RUN apk add --no-cache bash git && \
-    cd /app && \
-    git clone https://github.com/rshipp/python-nut2.git && \
-    cd python-nut2 && \
-    python setup.py install && \
-    cd .. && \
-    git clone https://github.com/rshipp/webNUT.git && cd webNUT && \
-    pip install --no-cache-dir -e .
+WORKDIR /app/
+#hadolint ignore=DL3018
+RUN apk add --no-cache bash git \
+    && git clone https://github.com/rshipp/webNUT.git \
+    && pip install --no-cache-dir -e webNUT
 
 COPY /docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh

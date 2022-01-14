@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -xe
+set -u -e -o pipefail
 
 upshost="${UPS_HOST:-127.0.0.1}"
 upsport="${UPS_PORT:-3493}"
