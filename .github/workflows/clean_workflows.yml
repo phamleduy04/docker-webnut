@@ -17,7 +17,7 @@ jobs:
           save_period: 30
           dry: ${{ env.DRY }}
 
-      - name: Delete workflow runs
+      - name: Delete failed workflows
         uses: dmvict/clean-workflow-runs@v1.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -29,6 +29,6 @@ jobs:
             skipped
             stale
             timed_out
-          save_period: 5
+          save_period: 1
           save_min_runs_number: 0
           dry: ${{ env.DRY }}
