@@ -23,6 +23,10 @@ buildnc: ## build image
 	@echo "build image ..."
 	docker compose build --no-cache
 
+buildmulti: ## build multi arch images
+	@echo "Building multi architectures images"
+	docker buildx build -o type=local,dest=none --platform linux/amd64,linux/arm64/v8 -f ./Dockerfile --progress plain --build-arg aptCacher='' -t edgd1er/webnut:latest .
+
 run:
 	@echo "run container"
 	docker compose up
