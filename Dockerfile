@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM python:3-alpine3.16
+FROM python:3-alpine3.18
 
 LABEL maintainer=edgd1er@hotmail.com
 EXPOSE 6543
