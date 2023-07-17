@@ -1,4 +1,4 @@
-![Docker Image CI](https://github.com/edgd1er/docker-webnut/workflows/Docker%20Image%20CI/badge.svg)
+[![build docker image](https://github.com/phamleduy04/docker-webnut/actions/workflows/build.yml/badge.svg)](https://github.com/phamleduy04/docker-webnut/actions/workflows/build.yml)
 
 
 Difference from [edgd1er](https://github.com/edgd1er/docker-webnut) version:
