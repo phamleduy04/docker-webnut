@@ -1,45 +1,47 @@
 ![Docker Image CI](https://github.com/edgd1er/docker-webnut/workflows/Docker%20Image%20CI/badge.svg)
 
-Difference from [teknologist's](https://github.com/rshipp/webNUT) version:
-- switch to python3-alpine3.14 as base image to reduce image size (900Mb -> 80Mb)
-- added actions to build image and publish to docker hub.
+
+Difference from [edgd1er](https://github.com/edgd1er/docker-webnut) version:
+- Use AdeMiller's webNUT version which support multiple hosts
 
 # docker-webNUT
 
 webNUT (UPS network monitoring web ui) dockerized.
 
-More infos on webNUT:  https://github.com/rshipp/webNUT
+More infos on webNUT: https://github.com/AdeMiller/webNUT
 
 Set the following environment variables:
 
-**UPS_HOST**    with NUT server host IP  *(default: 127.0.0.1)*
+**HOST_1**    with NUT server host IP 
 
-**UPS_PORT**	  with NUT server port  *(default: 3493)*
+**PORT_1**	  with NUT server port
 
-**UPS_USER**    with NUT server username   *(default: monuser)*
+**USER_1**    with NUT server username
 
-**UPS_PASSWORD**     with NUT server  password   *(default: secret)*
+**PASS_1**     with NUT server  password
 
+Increment by 1 each server (eg. `HOST_2`, `HOST_3`)
 
-
-
-Run with:
-
-> docker run -e UPS_HOST="10.11.12.13"  -e UPS_PORT="3493" -e UPS_USER="monuser" -e UPS_PASSWORD="secret" -p 6543:6543 -e  edgd1er/webnut:latest
 
 # Docker-compose
 
 ```
-version: "3.5"
+version: '3.6'
+
 services:
   webnut:
-    image: edgd1er/webnut:latest
+    image: ghcr.io/phamleduy04/docker-webnut:latest
     restart: always
-    environment:
-      UPS_HOST: "10.11.12.13"
-      UPS_PORT: "3493"
-      UPS_USER: "monuser"
-      UPS_PASSWORD: "secret"
     ports:
-     - "6543:6543"
+      - "6543:6543"
+    environment:
+      HOST_1: ""
+      PORT_1: ""
+      USER_1: ""
+      PASS_1: ""
+      # HOST_2: ""
+      # PORT_2: ""
+      # USER_2: ""
+      # PASS_2: ""
+      # Add more if you want
 ```
