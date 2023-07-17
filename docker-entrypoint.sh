@@ -1,18 +1,26 @@
 #!/usr/bin/env bash
-set -u -e -o pipefail
+cd /app/webNUT/webnut
+echo "from .webnut import NUTServer" > config.py
+echo "servers = [" >> config.py
 
-upshost="${UPS_HOST:-127.0.0.1}"
-upsport="${UPS_PORT:-3493}"
-upsuser="${UPS_USER:-monuser}"
-upspassword="${UPS_PASSWORD:-secret}"
+for ((i=1; ; i+=1)); do
+    host_var="HOST_$i"
+    port_var="PORT_$i"
+    user_var="USER_$i"
+    pass_var="PASS_$i"
 
-echo "server = '$upshost'" > /app/webNUT/webnut/config.py
-echo "port = '$upsport'" >> /app/webNUT/webnut/config.py
-echo "username = '$upsuser'" >> /app/webNUT/webnut/config.py
-echo "password = '$upspassword'" >> /app/webNUT/webnut/config.py
+    # Check if the environment variables exist
+    if [[ -z "${!host_var}" || -z "${!port_var}" || -z "${!user_var}" || -z "${!pass_var}" ]]; then
+        break
+    fi
 
-cat /app/webNUT/webnut/config.py
-cd /app/webNUT && python setup.py install
+    # Append the values to config.py
+    echo "NUTServer('${!host_var}', ${!port_var}, '${!user_var}', '${!pass_var}')," >> config.py
 
-cd webnut
-exec pserve ../production.ini
+    echo "Loaded host $i"
+done
+echo "]" >> config.py
+
+cd .. && python setup.py install
+
+exec pserve production.ini
